@@ -1,0 +1,2 @@
+top numbers : 4 7 3 6 3 10 40 4 2 2 38 9 47 2 3 6 41 
+evaluation result : 41

@@ -1,0 +1,27 @@
+insert 3
+insert 1
+insert 6
+insert 4
+6 4 3 1 
+max element : 6 deleted
+4 1 3 
+finding error : 6 is not in the heap
+finding error : 2 is not in the heap
+max element : 4 deleted
+insert 7
+insert 8
+insert 9
+insert 10
+insert error : heap is full
+insert error : heap is full
+insert error : heap is full
+insert error : heap is full
+insert error : heap is full
+insert error : heap is full
+10 8 9 1 7 3 
+10 8 9 1 7 3 
+10 8 9 1 7 3 
+max element : 10 deleted
+max element : 9 deleted
+max element : 8 deleted
+7 1 3 

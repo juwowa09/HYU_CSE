@@ -1,0 +1,24 @@
+left : 0, right : 9, pivot : 6
+8  1  4  9  0  3  5  2  7  6  
+2  1  4  9  0  3  5  8  7  6  
+2  1  4  5  0  3  9  8  7  6  
+2  1  4  5  0  3  6  8  7  9  
+left : 0, right : 5, pivot : 3
+2  1  4  5  0  3  -  -  -  -  
+2  1  0  5  4  3  -  -  -  -  
+2  1  0  3  4  5  -  -  -  -  
+left : 0, right : 2, pivot : 0
+2  1  0  -  -  -  -  -  -  -  
+0  1  2  -  -  -  -  -  -  -  
+left : 1, right : 2, pivot : 2
+-  1  2  -  -  -  -  -  -  -  
+left : 4, right : 5, pivot : 5
+-  -  -  -  4  5  -  -  -  -  
+left : 7, right : 9, pivot : 9
+-  -  -  -  -  -  -  8  7  9  
+left : 7, right : 8, pivot : 7
+-  -  -  -  -  -  -  8  7  -  
+-  -  -  -  -  -  -  7  8  -  
+
+sorting result :
+0  1  2  3  4  5  6  7  8  9  

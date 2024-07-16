@@ -1,0 +1,17 @@
+Warehouse0: (100.0, 200.0)
+##BasicCargo: 12 
+##LiquidCargo: 19 
+##Truck1: 230.7
+####BasicCargo: 0 1 2 
+####DangerousCargo: 3 
+####LiquidCargo: 4 
+##Truck2: 100.5
+####BasicCargo: 5 6 7 
+####HeavyCargo: 8 9 
+####LiquidCargo: 10 11 
+Warehouse1: (120.6, 250.0)
+##BasicCargo: 13 14 
+##LiquidCargo: 16 17 
+##Truck0: 260.0
+####BasicCargo: 15 
+####DangerousCargo: 18 

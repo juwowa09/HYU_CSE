@@ -1,0 +1,3 @@
+name: 123 / phone number: 010-2222-3333 / relation: 1234
+name: 1234 / phone number: 010-2333-4444 / club name: 123142
+name: anme / phone number: 010-2334-1123 / department: depart

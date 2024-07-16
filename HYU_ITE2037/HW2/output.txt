@@ -1,0 +1,12 @@
+Warehouse0: (0.0, 0.0)
+##Truck11: 0.0
+Warehouse1: (0.0, 0.0)
+##Truck5: 0.0
+##Truck10: 0.0
+Warehouse2: (0.0, 0.0)
+##Truck8: 0.0
+##Truck9: 0.0
+Warehouse3: (0.0, 0.0)
+##Truck4: 0.0
+##Truck6: 0.0
+##Truck7: 0.0

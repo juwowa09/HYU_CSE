@@ -1,0 +1,7 @@
+Warehouse0: (55.0, 84.0)
+##DangerousCargo: 2 
+##Truck0: 100.0
+Warehouse1: (50.0, 90.0)
+##Truck1: 64674.2
+####BasicCargo: 1 
+####HeavyCargo: 0 

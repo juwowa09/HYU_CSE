@@ -1,0 +1,45 @@
+
+C-MINUS COMPILATION: test.4.txt
+
+Building Symbol Table...
+
+
+< Symbol Table >
+ Symbol Name   Symbol Kind   Symbol Type    Scope Name   Location  Line Numbers
+-------------  -----------  -------------  ------------  --------  ------------
+main           Function     int            global        2           1 
+input          Function     int            global        0           0 
+output         Function     void           global        1           0    4 
+value          Variable     int            output        0           0 
+x              Variable     int[]          main          0           3    4 
+
+
+< Functions >
+Function Name   Return Type   Parameter Name  Parameter Type
+-------------  -------------  --------------  --------------
+main           int                            void        
+input          int                            void        
+output         void          
+-              -              value           int         
+
+
+< Global Symbols >
+ Symbol Name   Symbol Kind   Symbol Type
+-------------  -----------  -------------
+main           Function     int          
+input          Function     int          
+output         Function     void         
+
+
+< Scopes >
+ Scope Name   Nested Level   Symbol Name   Symbol Type
+------------  ------------  -------------  -----------
+output        1             value          int        
+
+main          1             x              int[]      
+
+
+Checking Types...
+Error: Invalid array indexing at line 4 (name : "x"). indices should be integer
+
+Type Checking Finished

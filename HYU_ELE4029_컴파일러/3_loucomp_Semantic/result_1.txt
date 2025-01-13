@@ -1,0 +1,56 @@
+
+C-MINUS COMPILATION: test.1.txt
+
+Building Symbol Table...
+
+
+< Symbol Table >
+ Symbol Name   Symbol Kind   Symbol Type    Scope Name   Location  Line Numbers
+-------------  -----------  -------------  ------------  --------  ------------
+main           Function     void           global        3          11 
+input          Function     int            global        0           0   14   14 
+output         Function     void           global        1           0   15 
+gcd            Function     int            global        2           4    7   15 
+value          Variable     int            output        0           0 
+u              Variable     int            gcd           0           4    6    7    7 
+v              Variable     int            gcd           1           4    6    7    7    7 
+x              Variable     int            main          0          13   14   15 
+y              Variable     int            main          1          13   14   15 
+
+
+< Functions >
+Function Name   Return Type   Parameter Name  Parameter Type
+-------------  -------------  --------------  --------------
+main           void                           void        
+input          int                            void        
+output         void          
+-              -              value           int         
+gcd            int           
+-              -              u               int         
+-              -              v               int         
+
+
+< Global Symbols >
+ Symbol Name   Symbol Kind   Symbol Type
+-------------  -----------  -------------
+main           Function     void         
+input          Function     int          
+output         Function     void         
+gcd            Function     int          
+
+
+< Scopes >
+ Scope Name   Nested Level   Symbol Name   Symbol Type
+------------  ------------  -------------  -----------
+output        1             value          int        
+
+gcd           1             u              int        
+gcd           1             v              int        
+
+main          1             x              int        
+main          1             y              int        
+
+
+Checking Types...
+
+Type Checking Finished

@@ -1,0 +1,34 @@
+/* A program to perform Euclid's
+   Algorithm to ******ddd/computer gcd */
+
+int gcd (int u, int v)
+{
+	int ss = u + v;
+	if (v == 0) return u;
+	else return gcd(v,u-u/v*v);
+	/* ******u-u/v*v//** =/= u mod v */
+}
+
+int sss (int as, int bd)
+{
+	if (as >= bd) return 2;
+	else return as;
+
+	while (as > 0) { arr[i]-- }
+	if (as == bd) { }
+	if (bd<as) { }
+	if (bd <= as) {}
+	if (as != bd) {}
+	if
+}
+
+void boy(){return ;}
+
+void main(void)
+{
+	int x; int y;
+	x = input(); y = input();
+	output(gcd(x,y));
+}
+
+

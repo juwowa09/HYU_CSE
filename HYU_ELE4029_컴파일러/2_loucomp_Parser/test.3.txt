@@ -1,0 +1,42 @@
+
+int gcd (int u, int v)
+{
+	if (v == 0) return u;
+	else return gcd(v,u-u/v*v);
+	/* u-u/v*v == u mod v */
+}
+
+void gcf (void)
+{
+	if (v == 0) return u;
+	/* u-u/v*v == u mod v */
+	return ;
+
+	while (u <= 3)
+	{
+		return ;
+	}
+}
+
+
+void main(void)
+{
+	int i; int x[5];
+	
+	i = 0;
+	while( i < 5 )
+	{
+		x[i] = input();
+
+		i = i + 1;
+	}
+
+	i = 0;
+	while( i <= 4 )
+	{
+		if( x[i] != 0 )
+		{
+			output(x[i]);
+		}
+	}
+}

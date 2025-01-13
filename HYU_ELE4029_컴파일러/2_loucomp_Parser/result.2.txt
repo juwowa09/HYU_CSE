@@ -1,0 +1,44 @@
+
+C-MINUS COMPILATION: ./test.2.txt
+
+Syntax tree:
+  Function Declaration: name = main, return type = void
+    Void Parameter
+    Compound Statement:
+      Variable Declaration: name = i, type = int
+      Variable Declaration: name = x, type = int[]
+        Const: 5
+      Assign:
+        Variable: name = i
+        Const: 0
+      While Statement:
+        Op: <
+          Variable: name = i
+          Const: 5
+        Compound Statement:
+          Assign:
+            Variable: name = x
+              Variable: name = i
+            Call: function name = input
+          Assign:
+            Variable: name = i
+            Op: +
+              Variable: name = i
+              Const: 1
+      Assign:
+        Variable: name = i
+        Const: 0
+      While Statement:
+        Op: <=
+          Variable: name = i
+          Const: 4
+        Compound Statement:
+          If Statement:
+            Op: !=
+              Variable: name = x
+                Variable: name = i
+              Const: 0
+            Compound Statement:
+              Call: function name = output
+                Variable: name = x
+                  Variable: name = i

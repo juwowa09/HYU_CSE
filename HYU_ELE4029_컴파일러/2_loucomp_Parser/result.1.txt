@@ -1,0 +1,39 @@
+
+C-MINUS COMPILATION: ./test.1.txt
+
+Syntax tree:
+  Function Declaration: name = gcd, return type = int
+    Parameter: name = u, type = int
+    Parameter: name = v, type = int
+    Compound Statement:
+      If-Else Statement:
+        Op: ==
+          Variable: name = v
+          Const: 0
+        Return Statement:
+          Variable: name = u
+        Return Statement:
+          Call: function name = gcd
+            Variable: name = v
+            Op: -
+              Variable: name = u
+              Op: *
+                Op: /
+                  Variable: name = u
+                  Variable: name = v
+                Variable: name = v
+  Function Declaration: name = main, return type = void
+    Void Parameter
+    Compound Statement:
+      Variable Declaration: name = x, type = int
+      Variable Declaration: name = y, type = int
+      Assign:
+        Variable: name = x
+        Call: function name = input
+      Assign:
+        Variable: name = y
+        Call: function name = input
+      Call: function name = output
+        Call: function name = gcd
+          Variable: name = x
+          Variable: name = y

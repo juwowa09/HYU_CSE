@@ -1,0 +1,7 @@
+insert 5
+insert 1
+insert 10
+1 5 10 
+5 is in the tree
+delete 5
+1 10 

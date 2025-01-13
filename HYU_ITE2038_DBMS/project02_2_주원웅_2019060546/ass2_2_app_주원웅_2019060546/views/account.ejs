@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>계좌 상세 정보</title>
+</head>
+
+<body>
+    <h1>계좌 상세 정보</h1>
+
+    <!-- 계좌 잔액 정보 -->
+    <h2>계좌 잔액</h2>
+    <p>잔액: ₩<%= cashBalance.toLocaleString() %>
+    </p>
+
+    <!-- 보유 주식 목록 -->
+    <h2>보유 주식 목록</h2>
+    <% if (holdings && holdings.length> 0) { %>
+        <table border="1">
+            <tr>
+                <th>종목명</th>
+                <th>수량</th>
+                <th>총 가치</th>
+            </tr>
+            <% holdings.forEach(stock=> { %>
+                <tr>
+                    <td>
+                        <%= stock.stock_name %>
+                    </td>
+                    <td>
+                        <%= stock.quantity %>
+                    </td>
+                    <td>₩<%= stock.total_value.toLocaleString() %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <% } else { %>
+            <p>보유 중인 주식이 없습니다.</p>
+            <% } %>
+
+                <!-- 구매 가능한 주식 목록 -->
+                <h2>구매 가능한 주식 목록</h2>
+                <% if (stocks && stocks.length> 0) { %>
+                    <table border="1">
+                        <tr>
+                            <th>종목명</th>
+                            <th>현재 가격</th>
+                            <th>거래</th>
+                        </tr>
+                        <% stocks.forEach(stock=> { %>
+                            <tr>
+                                <td>
+                                    <%= stock.stock_name %>
+                                </td>
+                                <td>₩<%= stock.current_price.toLocaleString() %>
+                                </td>
+                                <td>
+                                    <form action="/transaction" method="post" style="display:inline;">
+                                        <input type="hidden" name="action" value="transaction">
+                                        <input type="hidden" name="account_id" value="<%= account_id %>">
+                                        <input type="hidden" name="stock_name" value="<%= stock.stock_name %>">
+                                        <input type="hidden" name="stock_id" value="<%= stock.stock_id %>">
+                                        <input type="hidden" name="cash_balance" value="<%= cashBalance %>">
+                                        <button type="submit">거래</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </table>
+                    <% } else { %>
+                        <p>구매 가능한 주식이 없습니다.</p>
+                        <% } %>
+
+                            <!-- 대시보드로 돌아가기 버튼 -->
+                            <p>
+                            <form action="/account" method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="returnToDashboard">
+                                <input type="hidden" name="userID" value="<%= userID %>">
+                                <input type="hidden" name="id" value="<%= id %>">
+                                <button type="submit">대시보드로 돌아가기</button>
+                            </form>
+                            </p>
+</body>
+
+</html>

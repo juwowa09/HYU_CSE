@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= stock_name %> 호가창
+    </title>
+    <style>
+        .order-book-table {
+            width: 60%;
+            margin: auto;
+            border-collapse: collapse;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .order-book-table th,
+        .order-book-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .order-book-table th {
+            background-color: #f2f2f2;
+        }
+
+        .ask-row {
+            color: #007bff;
+            /* 매도 호가 색상 */
+        }
+
+        .bid-row {
+            color: #ff4500;
+            /* 매수 호가 색상 */
+        }
+
+        .strong {
+            font-weight: bold;
+        }
+
+        .order-input {
+            width: 80%;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        .order-button {
+            padding: 5px 10px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <% if(typeof tResult !=='undefined' && tResult=='fail' ) {%>
+        <script> alert("buy fail have not enough money")</script>
+        <%}%>
+
+            <h1>
+                <%= stock_name %> 호가창
+            </h1>
+            <p>계좌 잔액: ₩<%= cash_balance.toLocaleString() %>
+            </p>
+
+            <table class="order-book-table">
+                <thead>
+                    <tr>
+                        <th>매도잔량</th>
+                        <th>매도호가</th>
+                        <th>매수호가</th>
+                        <th>매수잔량</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 매도 호가 5단계 (가격 오름차순) -->
+                    <% for (let i=sellResults.length - 1; i>= Math.max(0, sellResults.length - 5); i--) { %>
+                        <tr>
+                            <td class="ask-row">
+                                <%= sellResults[i].total_quantity.toLocaleString() %>
+                            </td>
+                            <td class="ask-row">
+                                <%= sellResults[i].price.toLocaleString() %>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <% } %>
+
+                            <!-- 빈 행 추가로 분리 -->
+                            <tr>
+                                <td colspan="4" style="background-color: #f2f2f2; height: 10px;"></td>
+                            </tr>
+
+                            <!-- 매수 호가 5단계 (가격 내림차순) -->
+                            <% for (let i=0; i < Math.min(5, buyResults.length); i++) { %>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="bid-row">
+                                        <%= buyResults[i].price.toLocaleString() %>
+                                    </td>
+                                    <td class="bid-row">
+                                        <%= buyResults[i].total_quantity.toLocaleString() %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                </tbody>
+            </table>
+
+            <!-- 판매/구매 입력 섹션 -->
+            <div style="display: flex; justify-content: space-between; width: 60%; margin: 20px auto;">
+                <!-- 판매 입력 및 버튼 -->
+                <form action="/transaction" method="post" style="text-align: center;">
+                    <input type="hidden" name="action" value="sell">
+                    <input type="hidden" name="stock_id" value="<%= stock_id %>">
+                    <input type="hidden" name="account_id" value="<%= account_id %>">
+                    <input type="hidden" name="stock_name" value="<%= stock_name %>">
+                    <input type="hidden" name="cash_balance" value="<%= cash_balance %>">
+                    <label>
+                        판매 금액: ₩
+                        <input type="number" name="sell_price" class="order-input" placeholder="금액 입력" required>
+                    </label>
+                    <br>
+                    <label>
+                        판매 수량:
+                        <input type="number" name="sell_quantity" class="order-input" placeholder="수량 입력" required>
+                    </label>
+                    <br>
+                    <button type="submit" class="order-button">판매</button>
+                </form>
+
+                <!-- 구매 입력 및 버튼 -->
+                <form action="/transaction" method="post" style="text-align: center;">
+                    <input type="hidden" name="action" value="buy">
+                    <input type="hidden" name="stock_id" value="<%= stock_id %>">
+                    <input type="hidden" name="account_id" value="<%= account_id %>">
+                    <input type="hidden" name="stock_name" value="<%= stock_name %>">
+                    <input type="hidden" name="cash_balance" value="<%= cash_balance %>">
+                    <label>
+                        구매 금액: ₩
+                        <input type="number" name="buy_price" class="order-input" placeholder="금액 입력" required>
+                    </label>
+                    <br>
+                    <label>
+                        구매 수량:
+                        <input type="number" name="buy_quantity" class="order-input" placeholder="수량 입력" required>
+                    </label>
+                    <br>
+                    <button type="submit" class="order-button">구매</button>
+                </form>
+            </div>
+</body>
+
+</html>

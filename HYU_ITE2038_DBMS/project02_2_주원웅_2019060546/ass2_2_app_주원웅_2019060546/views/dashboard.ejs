@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTS Dashboard</title>
+</head>
+
+<body>
+    <h1>HTS Dashboard</h1>
+    <p>환영합니다, <%= userID %>님!</p>
+
+    <% if (accounts && accounts.length> 0) { %>
+        <h2>내 계좌 목록</h2>
+        <table border="1">
+            <tr>
+                <th>계좌 번호</th>
+                <th>잔액</th>
+                <th>기능</th>
+            </tr>
+            <% accounts.forEach(account=> { %>
+                <tr>
+                    <td>
+                        <%= account.account_id %>
+                    </td>
+                    <td>₩<%= account.cash_balance.toLocaleString() %>
+                    </td>
+                    <td>
+                        <!-- 입금 버튼 폼 -->
+                        <form action="/dashboard" method="post" style="display:inline;">
+                            <input type="hidden" name="action" value="deposit">
+                            <input type="hidden" name="userID" value="<%= userID %>">
+                            <input type="hidden" name="id" value="<%= id %>">
+                            <input type="hidden" name="account_id" value="<%= account.account_id %>">
+                            <input type="number" name="amount" placeholder="입금 금액" min="0" required>
+                            <button type="submit">입금</button>
+                        </form>
+
+                        <form action="/dashboard" method="post" style="display:inline;">
+                            <input type="hidden" name="action" value="datail">
+                            <input type="hidden" name="userID" value="<%= userID %>">
+                            <input type="hidden" name="id" value="<%= id %>">
+                            <input type="hidden" name="account_id" value="<%= account.account_id %>">
+                            <button type="submit">계좌 상세</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <% } else { %>
+            <p>보유한 계좌가 없습니다.</p>
+            <% } %>
+
+                <h2>주요 기능</h2>
+                <form action="/dashboard" method="post">
+                    <input type="hidden" name="action" value="createAccount">
+                    <input type="hidden" name="userID" value="<%= userID %>">
+                    <input type="hidden" name="id" value="<%= id %>">
+                    <button type="submit">계좌 생성</button>
+                </form>
+</body>
+
+</html>

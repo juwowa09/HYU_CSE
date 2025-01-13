@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <mata charset="UTF-8">
+        <title>Initial page</title>
+</head>
+
+<body>
+    <h1>HTS App Practive</h1>
+    <button id="login">로그인</button>
+    <button id="signup">회원가입</button>
+    <script>
+        const loginButton = document.getElementById("login");
+        const signupButton = document.getElementById("signup");
+
+        loginButton.addEventListener('click', () => {
+            window.location = 'http://localhost:3000/login';
+        });
+        signupButton.addEventListener('click', () => {
+            window.location = 'http://localhost:3000/signup';
+        });
+    </script>
+</body>
+
+</html>

@@ -271,7 +271,7 @@ def main():
 
         # rotation
         # th = np.radians(t*90)
-        R = glm.rotate(angle, glm.vec3(1,0,0))
+        R = glm.rotate(angle, glm.vec3(0,1,0))
 
         light_cur = glm.vec3(R * glm.vec4(light_init, 1))
         M = glm.mat4()

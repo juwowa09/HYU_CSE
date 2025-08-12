@@ -261,7 +261,7 @@ def main():
     glfwSetKeyCallback(window, key_callback);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback)
-
+    framebuffer_size_callback(window,800,800)
     # load shaders
     shader_program = load_shaders(g_vertex_shader_src, g_fragment_shader_src)
 

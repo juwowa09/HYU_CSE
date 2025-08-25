@@ -4,11 +4,8 @@ import glm
 import ctypes
 import numpy as np
 
-g_alpha = 0
-g_beta = 0
-g_gamma = 0
 g_cam_ang = 0.
-g_cam_height = 1.0
+g_cam_height = .1
 
 g_vertex_shader_src_lighting = '''
 #version 330 core
@@ -163,7 +160,7 @@ def load_shaders(vertex_shader_source, fragment_shader_source):
 
 
 def key_callback(window, key, scancode, action, mods):
-    global g_cam_ang, g_cam_height, g_alpha, g_beta, g_gamma
+    global g_cam_ang, g_cam_height
     if key==GLFW_KEY_ESCAPE and action==GLFW_PRESS:
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     else:
@@ -176,22 +173,6 @@ def key_callback(window, key, scancode, action, mods):
                 g_cam_height += .1
             elif key==GLFW_KEY_W:
                 g_cam_height += -.1
-            elif key==GLFW_KEY_A:
-                g_alpha += glm.radians(10)
-            elif key==GLFW_KEY_Z:
-                g_alpha += glm.radians(-10)
-            elif key==GLFW_KEY_S:
-                g_beta += glm.radians(10)
-            elif key==GLFW_KEY_X:
-                g_beta += glm.radians(-10)
-            elif key==GLFW_KEY_D:
-                g_gamma += glm.radians(10)
-            elif key==GLFW_KEY_C:
-                g_gamma += glm.radians(-10)
-            elif key==GLFW_KEY_V:
-                g_gamma = 0
-                g_alpha = 0
-                g_beta = 0
 
 def prepare_vao_cube():
     # prepare vertex data (in main memory)
@@ -313,8 +294,30 @@ def draw_cube(vao, MVP, M, matcolor, unif_locs):
     glBindVertexArray(vao)
     glDrawArrays(GL_TRIANGLES, 0, 36)
 
+def ZYXEulerToRotMat(angles):
+    zang, yang, xang = angles
+    Rx = glm.rotate(xang, (1,0,0))
+    Ry = glm.rotate(yang, (0,1,0))
+    Rz = glm.rotate(zang, (0,0,1))
+    return glm.mat3(Rz * Ry * Rx)
+
+def slerp(R1, R2, t):
+    return R1 * exp( t * log(glm.transpose(R1) * R2) )
+
+eps = 1e-6
+def exp(rotvec):
+    angle = glm.l2Norm(rotvec)
+    if angle > eps:
+        axis = glm.normalize(rotvec)
+        return glm.mat3(glm.rotate(angle, axis))
+    else:
+        return glm.mat3()
+
+def log(rotmat):
+    quat = glm.quat(rotmat)
+    return glm.angle(quat) * glm.axis(quat)
+
 def main():
-    global g_gamma, g_bata, g_alpha
     # initialize glfw
     if not glfwInit():
         return
@@ -324,7 +327,7 @@ def main():
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE) # for macOS
 
     # create a window and OpenGL context
-    window = glfwCreateWindow(800, 800, '1-euler-angles', None, None)
+    window = glfwCreateWindow(800, 800, '2-slerp', None, None)
     if not window:
         glfwTerminate()
         return
@@ -350,6 +353,12 @@ def main():
     vao_cube = prepare_vao_cube()
     vao_frame = prepare_vao_frame()
 
+    # start orientation: ZYX Euler angles - rot z by -90 deg then rot y by 90 then rot x by 0
+    R1 = ZYXEulerToRotMat((-np.pi*.5, 0, 0))
+
+    # end orientation: ZYX Euler angles - rot z by 0 then rot y by 0 then rot x by 90
+    R2 = ZYXEulerToRotMat((0, 0, np.pi*.5))
+
     # loop until the user closes the window
     while not glfwWindowShouldClose(window):
         # enable depth test (we'll see details later)
@@ -367,12 +376,12 @@ def main():
         glUseProgram(shader_color)
         draw_frame(vao_frame, P*V, unif_locs_color)
 
-        # ZYX Euler angles
+        # t is repeatedly increasing from 0.0 to 1.0
+        t = glfwGetTime() % 3 / 3
 
-        M = glm.mat4(1)
-        M = glm.rotate(M, g_alpha, glm.vec3(0,0,1))   # Rz(α)
-        M = glm.rotate(M, g_beta,  glm.vec3(1,0,0))   # Rx(β) on NEW X
-        M = glm.rotate(M, g_gamma, glm.vec3(0,1,0))   # Rz(γ) on NEW Z
+        # slerp
+        R = slerp(R1, R2, t)
+        M = glm.mat4(R)
 
         # set view_pos uniform in shader_lighting
         glUseProgram(shader_lighting)
@@ -404,4 +413,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
